@@ -11,16 +11,16 @@ import (
 )
 
 type event struct {
-	ID          string `json:"ID"`
-	Title       string `json:"Title"`
-	Description string `json:"Description"`
+	ID            string `json:"ID"`
+	Title         string `json:"Title"`
+	Description   string `json:"Description"`
+	HoraRealizada string `json:"HoraRealizada"`
+	ResVisita     string `json:"ResVisita"`
 }
 
 type allEvents []event
 
-var events = allEvents{
-
-}
+var events = allEvents{}
 
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Testing the api!")
@@ -68,6 +68,8 @@ func updateEvent(w http.ResponseWriter, r *http.Request) {
 		if singleEvent.ID == eventID {
 			singleEvent.Title = updatedEvent.Title
 			singleEvent.Description = updatedEvent.Description
+			singleEvent.HoraRealizada = updatedEvent.HoraRealizada
+			singleEvent.ResVisita = updatedEvent.ResVisita
 			events = append(events[:i], singleEvent)
 			json.NewEncoder(w).Encode(singleEvent)
 		}
